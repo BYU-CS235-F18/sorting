@@ -1,5 +1,14 @@
 #include "sort.h"
 
+vector<int> getRandomNums(int n=10)
+{
+	srand(time(NULL));
+	vector<int> randomNums;
+	for(int i = 0; i < n; i++)
+		randomNums.push_back(rand() % 100);
+	return randomNums;
+}
+
 void testSort(void (*sortFunction)(std::vector<int>&), string sortName)
 {
 	cout << "--- Testing " << sortName << " --- " << endl;
@@ -21,6 +30,20 @@ void testSort(void (*sortFunction)(std::vector<int>&), string sortName)
 	nums.push_back(5);
 	nums.push_back(9);
 	nums.push_back(1);
+	sortFunction(nums);
+	cout << endl;
+
+	// Test 3
+	nums.clear();
+	nums.push_back(9);
+	for(int i = 0; i < 9; i++)
+		nums.push_back(i);
+	sortFunction(nums);
+	cout << endl;
+
+	// Test 4 (random)
+	nums.clear();
+	nums = getRandomNums();
 	sortFunction(nums);
 	cout << endl;
 }
