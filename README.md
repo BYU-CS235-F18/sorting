@@ -86,8 +86,8 @@ for each i from 1 to size-1:
 	j = i
 	item = list[j]
 	while j > 0 and list[j-1] > item:
-		list[j] = list[j-1];
-		j--;
+		list[j] = list[j-1]
+		j--
 	list[j] = item
 ```
 
@@ -116,6 +116,98 @@ void Sort::insertionSort(vector<int>& list)
 
 # Merge Sort
 
+Merge sort uses a recursive divide-and-conquer technique that splits the list in half and then merges the two halves back together in sorted order, and it ends up having a more efficient Big O of O(n log n). 
+
+Here is the basic algorithm:
+
+```bash
+if the size of the List is at least 2:
+  split the List into the left half and the right half
+	recursively sort left
+	recursively sort right
+	merge left and right into one List
+```
+
+If the list has at least two elements, split the list in half. Recursively call the sort function for each half. Then merge the two halves back together. The merge step is done by looking at the first value of the left half and the first value of the right half. If the first value of the left half is smaller than the first value of the right half, then remove the first value on the left from the left half and append it to the merged list. If the first value on the right half is smaller than the first value of the left half, then remove the first value on the right from the right half and append it to the merges list. Repeat until the left and right halves are empty and all values are in the merged list.
+
+```bash
+mergeSort ( list ):
+	if ( list.size > 1 ):
+		split( list, left, right )
+		mergeSort( left )
+		mergeSort( right )
+		merge( left, right, list )
+
+split ( list, left, right ):
+	for each item in the left half of list (less than or equal to middle index):
+		add the item to left
+	for each item in the right half of list (greater than middle index):
+		add the item to right
+
+merge( left, right, list ):
+	while both left and right have more items:
+		if the left item is less than the right item:
+			add the left item to list
+		else:
+			add the right item to list
+	while left has more items:
+		add the left item to list
+	while right has more items:
+		add the right item to list
+```
+
+```c++
+void Sort::mergeSort(vector<int>& list)
+{
+	if(list.size() < 2)
+		return;
+	vector<int> left, right;
+	split(list, left, right);
+	mergeSort(left);
+	mergeSort(right);
+	merge(left, right, list);
+}
+
+void Sort::split(vector<int>& list, vector<int>& left, vector<int>& right)
+{
+	int middle = list.size()/2;
+	for(int i = 0; i < middle; i++)
+		left.push_back(list[i]);
+	for(int i = middle; i < list.size(); i++)
+		right.push_back(list[i]);
+}
+
+void Sort::merge(vector<int>& left, vector<int>& right, vector<int>& list)
+{
+	list.clear();
+	int l = 0;
+	int r = 0;
+	while(l < left.size() && r < right.size())
+	{
+		if(left[l] < right[r])
+		{
+			list.push_back(left[l]);
+			l++;
+		}
+		else
+		{
+			list.push_back(right[r]);
+			r++;
+		}
+	}
+	while(l < left.size())
+	{
+		list.push_back(left[l]);
+		l++;
+	}
+	while(r < right.size())
+	{
+		list.push_back(right[r]);
+		r++;
+	}
+}
+```
+
 # Test Driver
 
 The test driver has a function that takes a sorting function as input:
@@ -136,4 +228,16 @@ int main()
 	testSort(mySort.selectionSort, "Selection Sort");
 	testSort(mySort.mergeSort, "Merge Sort");
 }
+```
+
+In order for this to work, the functions have to be declared as static in the Sort class:
+
+```c++
+public:
+	Sort() {};
+	~Sort() {};
+	static void bubbleSort(vector<int>& list);
+	static void selectionSort(vector<int>& list);
+	static void insertionSort(vector<int>& list);
+	static void mergeSort(vector<int>& list);
 ```
