@@ -146,3 +146,70 @@ void Sort::mergeSort(vector<int>& list)
 	mergeSort(right);
 	merge(left, right, list);
 }
+
+
+
+/*
+ * Functions for pretty print version of merge sort
+ * Use @param level to keep track of recursive depth
+ *   level should start at 0
+ */
+void Sort::mergeSortPretty(vector<int>& list, int level)
+{
+	for(int i = 0; i < level*2; i++)
+		cout << " ";
+	cout << "mergeSort: " << vecToStr(list) << endl;
+	if(list.size() < 2)
+		return;
+	vector<int> left, right;
+	splitPretty(list, left, right, level+1);
+	mergeSortPretty(left, level+2);
+	mergeSortPretty(right, level+2);
+	mergePretty(left, right, list, level+1);
+}
+void Sort::splitPretty(vector<int>& list, vector<int>& left, vector<int>& right, int level)
+{
+	for(int i = 0; i < level*2; i++)
+		cout << " ";
+  cout << "split: " << vecToStr(list) << endl;
+	int middle = list.size()/2;
+	for(int i = 0; i < middle; i++)
+		left.push_back(list[i]);
+	for(int i = middle; i < list.size(); i++)
+		right.push_back(list[i]);
+}
+void Sort::mergePretty(vector<int>& left, vector<int>& right, vector<int>& list, int level)
+{
+	for(int i = 0; i < level*2; i++)
+		cout << " ";
+	cout << "merge: " << vecToStr(left) << ", " << vecToStr(right) << endl;
+	list.clear();
+	int l = 0;
+	int r = 0;
+	while(l < left.size() && r < right.size())
+	{
+		if(left[l] < right[r])
+		{
+			list.push_back(left[l]);
+			l++;
+		}
+		else
+		{
+			list.push_back(right[r]);
+			r++;
+		}
+	}
+	while(l < left.size())
+	{
+		list.push_back(left[l]);
+		l++;
+	}
+	while(r < right.size())
+	{
+		list.push_back(right[r]);
+		r++;
+	}
+	for(int i = 0; i < level*2; i++)
+		cout << " ";
+	cout << "merged: " << vecToStr(list) << endl;
+}

@@ -29,6 +29,12 @@ private:
 	 */
 	static void merge(vector<int>& left, vector<int>& right, vector<int>& list);
 
+	/*
+	 * Used for a pretty print version of merge sort
+	 */
+	static void splitPretty(vector<int>& list, vector<int>& left, vector<int>& right, int level=0);
+	static void mergePretty(vector<int>& left, vector<int>& right, vector<int>& list, int level=0);
+
 public:
 	Sort() {};
 	~Sort() {};
@@ -36,4 +42,9 @@ public:
 	static void selectionSort(vector<int>& list);
 	static void insertionSort(vector<int>& list);
 	static void mergeSort(vector<int>& list);
+
+	/*
+	 * Used for a pretty print version of merge sort
+	 */
+	static void mergeSortPretty(vector<int>& list, int level=0);
 };
