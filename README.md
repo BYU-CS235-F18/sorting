@@ -207,6 +207,170 @@ void Sort::merge(vector<int>& left, vector<int>& right, vector<int>& list)
 	}
 }
 ```
+# Merge Sort Pretty Print
+
+I added a "pretty print" version of merge sort that uses whitespace to line up the recursive calls so that it's a little easier to follow. Here's an example of the output; you can use it to deepen your understanding of merge sort:
+
+```bash
+--- Testing Pretty Merge Sort --- 
+mergeSort: 7,6,5,4,3,2,1
+  split: 7,6,5,4,3,2,1
+    mergeSort: 7,6,5
+      split: 7,6,5
+        mergeSort: 7
+        mergeSort: 6,5
+          split: 6,5
+            mergeSort: 6
+            mergeSort: 5
+          merge: 6, 5
+          merged: 5,6
+      merge: 7, 5,6
+      merged: 5,6,7
+    mergeSort: 4,3,2,1
+      split: 4,3,2,1
+        mergeSort: 4,3
+          split: 4,3
+            mergeSort: 4
+            mergeSort: 3
+          merge: 4, 3
+          merged: 3,4
+        mergeSort: 2,1
+          split: 2,1
+            mergeSort: 2
+            mergeSort: 1
+          merge: 2, 1
+          merged: 1,2
+      merge: 3,4, 1,2
+      merged: 1,2,3,4
+  merge: 5,6,7, 1,2,3,4
+  merged: 1,2,3,4,5,6,7
+
+mergeSort: 3,7,2,8,5,9,1
+  split: 3,7,2,8,5,9,1
+    mergeSort: 3,7,2
+      split: 3,7,2
+        mergeSort: 3
+        mergeSort: 7,2
+          split: 7,2
+            mergeSort: 7
+            mergeSort: 2
+          merge: 7, 2
+          merged: 2,7
+      merge: 3, 2,7
+      merged: 2,3,7
+    mergeSort: 8,5,9,1
+      split: 8,5,9,1
+        mergeSort: 8,5
+          split: 8,5
+            mergeSort: 8
+            mergeSort: 5
+          merge: 8, 5
+          merged: 5,8
+        mergeSort: 9,1
+          split: 9,1
+            mergeSort: 9
+            mergeSort: 1
+          merge: 9, 1
+          merged: 1,9
+      merge: 5,8, 1,9
+      merged: 1,5,8,9
+  merge: 2,3,7, 1,5,8,9
+  merged: 1,2,3,5,7,8,9
+
+mergeSort: 9,0,1,2,3,4,5,6,7,8
+  split: 9,0,1,2,3,4,5,6,7,8
+    mergeSort: 9,0,1,2,3
+      split: 9,0,1,2,3
+        mergeSort: 9,0
+          split: 9,0
+            mergeSort: 9
+            mergeSort: 0
+          merge: 9, 0
+          merged: 0,9
+        mergeSort: 1,2,3
+          split: 1,2,3
+            mergeSort: 1
+            mergeSort: 2,3
+              split: 2,3
+                mergeSort: 2
+                mergeSort: 3
+              merge: 2, 3
+              merged: 2,3
+          merge: 1, 2,3
+          merged: 1,2,3
+      merge: 0,9, 1,2,3
+      merged: 0,1,2,3,9
+    mergeSort: 4,5,6,7,8
+      split: 4,5,6,7,8
+        mergeSort: 4,5
+          split: 4,5
+            mergeSort: 4
+            mergeSort: 5
+          merge: 4, 5
+          merged: 4,5
+        mergeSort: 6,7,8
+          split: 6,7,8
+            mergeSort: 6
+            mergeSort: 7,8
+              split: 7,8
+                mergeSort: 7
+                mergeSort: 8
+              merge: 7, 8
+              merged: 7,8
+          merge: 6, 7,8
+          merged: 6,7,8
+      merge: 4,5, 6,7,8
+      merged: 4,5,6,7,8
+  merge: 0,1,2,3,9, 4,5,6,7,8
+  merged: 0,1,2,3,4,5,6,7,8,9
+
+mergeSort: 40,13,33,72,59,16,1,98,7,56
+  split: 40,13,33,72,59,16,1,98,7,56
+    mergeSort: 40,13,33,72,59
+      split: 40,13,33,72,59
+        mergeSort: 40,13
+          split: 40,13
+            mergeSort: 40
+            mergeSort: 13
+          merge: 40, 13
+          merged: 13,40
+        mergeSort: 33,72,59
+          split: 33,72,59
+            mergeSort: 33
+            mergeSort: 72,59
+              split: 72,59
+                mergeSort: 72
+                mergeSort: 59
+              merge: 72, 59
+              merged: 59,72
+          merge: 33, 59,72
+          merged: 33,59,72
+      merge: 13,40, 33,59,72
+      merged: 13,33,40,59,72
+    mergeSort: 16,1,98,7,56
+      split: 16,1,98,7,56
+        mergeSort: 16,1
+          split: 16,1
+            mergeSort: 16
+            mergeSort: 1
+          merge: 16, 1
+          merged: 1,16
+        mergeSort: 98,7,56
+          split: 98,7,56
+            mergeSort: 98
+            mergeSort: 7,56
+              split: 7,56
+                mergeSort: 7
+                mergeSort: 56
+              merge: 7, 56
+              merged: 7,56
+          merge: 98, 7,56
+          merged: 7,56,98
+      merge: 1,16, 7,56,98
+      merged: 1,7,16,56,98
+  merge: 13,33,40,59,72, 1,7,16,56,98
+  merged: 1,7,13,16,33,40,56,59,72,98
+```
 
 # Test Driver
 
